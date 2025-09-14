@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
         }
         gettimeofday(&t2, NULL);
         dt = t2.tv_sec-t1.tv_sec+(t2.tv_usec-t1.tv_usec)*1e-6;
-        avg_us += (1000000L*(t2.tv_sec-t1.tv_sec)+t2.tv_usec-t1.tv_usec)/1e3;
+        avg_us += 1e3*(t2.tv_sec-t1.tv_sec)+1e-3*(t2.tv_usec-t1.tv_usec);
     }
     printf("%lf fps avg rendering cube", 1e6/avg_us);
     return 0;
