@@ -1,0 +1,19 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\n\x00f\x00b\x00f\x00u\x00n)
+
+[CMake]
+Build Directory Count=1
+Current Build Directory Index-Host System=0
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=/mnt/opitu/Gizmos/stuff/projects/fbfun/build
+Build Type=
+CMake Binary=/home/opitu/.nix-profile/bin/cmake
+CMake Executable=/home/opitu/.nix-profile/bin/cmake
+Environment Profile=
+Extra Arguments=--fresh
+Install Directory=
+Runtime=Host System
+
+[Project]
+VersionControlSupport=kdevgit

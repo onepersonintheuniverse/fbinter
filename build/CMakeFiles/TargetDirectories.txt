@@ -1,0 +1,3 @@
+/mnt/opitu/Gizmos/stuff/projects/fbfun/build/CMakeFiles/fbfun.dir
+/mnt/opitu/Gizmos/stuff/projects/fbfun/build/CMakeFiles/edit_cache.dir
+/mnt/opitu/Gizmos/stuff/projects/fbfun/build/CMakeFiles/rebuild_cache.dir
