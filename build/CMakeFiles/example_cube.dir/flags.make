@@ -4,7 +4,7 @@
 # compile C with /home/opitu/.nix-profile/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/mnt/opitu/Gizmos/stuff/projects/fbfun/include
+C_INCLUDES = -I/home/opitu/gizmos/projects/fbinter/include
 
 C_FLAGS = -lm -std=gnu99
 

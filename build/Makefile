@@ -57,10 +57,10 @@ RM = /nix/store/29ax4k0a83zhz43lb73cv610d95wdsx1-cmake-3.31.6/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/opitu/Gizmos/stuff/projects/fbfun
+CMAKE_SOURCE_DIR = /home/opitu/gizmos/projects/fbinter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/opitu/Gizmos/stuff/projects/fbfun/build
+CMAKE_BINARY_DIR = /home/opitu/gizmos/projects/fbinter/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/opitu/Gizmos/stuff/projects/fbfun/build/CMakeFiles /mnt/opitu/Gizmos/stuff/projects/fbfun/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/opitu/gizmos/projects/fbinter/build/CMakeFiles /home/opitu/gizmos/projects/fbinter/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/opitu/Gizmos/stuff/projects/fbfun/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/opitu/gizmos/projects/fbinter/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named fbfun
+# Target rules for targets named example_cube
 
 # Build rule for target.
-fbfun: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fbfun
-.PHONY : fbfun
+example_cube: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example_cube
+.PHONY : example_cube
 
 # fast build rule for target.
-fbfun/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fbfun.dir/build.make CMakeFiles/fbfun.dir/build
-.PHONY : fbfun/fast
+example_cube/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example_cube.dir/build.make CMakeFiles/example_cube.dir/build
+.PHONY : example_cube/fast
 
 src/main.o: src/main.c.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fbfun.dir/build.make CMakeFiles/fbfun.dir/src/main.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example_cube.dir/build.make CMakeFiles/example_cube.dir/src/main.c.o
 .PHONY : src/main.c.o
 
 src/main.i: src/main.c.i
@@ -142,7 +142,7 @@ src/main.i: src/main.c.i
 
 # target to preprocess a source file
 src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fbfun.dir/build.make CMakeFiles/fbfun.dir/src/main.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example_cube.dir/build.make CMakeFiles/example_cube.dir/src/main.c.i
 .PHONY : src/main.c.i
 
 src/main.s: src/main.c.s
@@ -150,7 +150,7 @@ src/main.s: src/main.c.s
 
 # target to generate assembly for a file
 src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fbfun.dir/build.make CMakeFiles/fbfun.dir/src/main.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example_cube.dir/build.make CMakeFiles/example_cube.dir/src/main.c.s
 .PHONY : src/main.c.s
 
 # Help Target
@@ -161,7 +161,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... fbfun"
+	@echo "... example_cube"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

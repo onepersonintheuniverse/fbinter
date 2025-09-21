@@ -54,20 +54,20 @@ RM = /nix/store/29ax4k0a83zhz43lb73cv610d95wdsx1-cmake-3.31.6/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/opitu/Gizmos/stuff/projects/fbfun
+CMAKE_SOURCE_DIR = /home/opitu/gizmos/projects/fbinter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/opitu/Gizmos/stuff/projects/fbfun/build
+CMAKE_BINARY_DIR = /home/opitu/gizmos/projects/fbinter/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/fbfun.dir/all
+all: CMakeFiles/example_cube.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen: CMakeFiles/fbfun.dir/codegen
+codegen: CMakeFiles/example_cube.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -75,40 +75,40 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/fbfun.dir/clean
+clean: CMakeFiles/example_cube.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/fbfun.dir
+# Target rules for target CMakeFiles/example_cube.dir
 
 # All Build rule for target.
-CMakeFiles/fbfun.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fbfun.dir/build.make CMakeFiles/fbfun.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fbfun.dir/build.make CMakeFiles/fbfun.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/opitu/Gizmos/stuff/projects/fbfun/build/CMakeFiles --progress-num=1,2 "Built target fbfun"
-.PHONY : CMakeFiles/fbfun.dir/all
+CMakeFiles/example_cube.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example_cube.dir/build.make CMakeFiles/example_cube.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example_cube.dir/build.make CMakeFiles/example_cube.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/opitu/gizmos/projects/fbinter/build/CMakeFiles --progress-num=1,2 "Built target example_cube"
+.PHONY : CMakeFiles/example_cube.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/fbfun.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/opitu/Gizmos/stuff/projects/fbfun/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/fbfun.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/opitu/Gizmos/stuff/projects/fbfun/build/CMakeFiles 0
-.PHONY : CMakeFiles/fbfun.dir/rule
+CMakeFiles/example_cube.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/opitu/gizmos/projects/fbinter/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/example_cube.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/opitu/gizmos/projects/fbinter/build/CMakeFiles 0
+.PHONY : CMakeFiles/example_cube.dir/rule
 
 # Convenience name for target.
-fbfun: CMakeFiles/fbfun.dir/rule
-.PHONY : fbfun
+example_cube: CMakeFiles/example_cube.dir/rule
+.PHONY : example_cube
 
 # codegen rule for target.
-CMakeFiles/fbfun.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fbfun.dir/build.make CMakeFiles/fbfun.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/opitu/Gizmos/stuff/projects/fbfun/build/CMakeFiles --progress-num=1,2 "Finished codegen for target fbfun"
-.PHONY : CMakeFiles/fbfun.dir/codegen
+CMakeFiles/example_cube.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example_cube.dir/build.make CMakeFiles/example_cube.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/opitu/gizmos/projects/fbinter/build/CMakeFiles --progress-num=1,2 "Finished codegen for target example_cube"
+.PHONY : CMakeFiles/example_cube.dir/codegen
 
 # clean rule for target.
-CMakeFiles/fbfun.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fbfun.dir/build.make CMakeFiles/fbfun.dir/clean
-.PHONY : CMakeFiles/fbfun.dir/clean
+CMakeFiles/example_cube.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example_cube.dir/build.make CMakeFiles/example_cube.dir/clean
+.PHONY : CMakeFiles/example_cube.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

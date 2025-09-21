@@ -7,7 +7,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/mnt/opitu/Gizmos/stuff/projects/fbfun/CMakeLists.txt"
+  "/home/opitu/gizmos/projects/fbinter/CMakeLists.txt"
   "CMakeFiles/3.31.6/CMakeCCompiler.cmake"
   "CMakeFiles/3.31.6/CMakeSystem.cmake"
   "/nix/store/29ax4k0a83zhz43lb73cv610d95wdsx1-cmake-3.31.6/share/cmake-3.31/Modules/CMakeCCompiler.cmake.in"
@@ -112,5 +112,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/fbfun.dir/DependInfo.cmake"
+  "CMakeFiles/example_cube.dir/DependInfo.cmake"
   )

@@ -1,10 +1,7 @@
 #ifndef _KT_FBFUN_RENDER_H
 #define _KT_FBFUN_RENDER_H
 #include <time.h>
-
-typedef _Bool bool;
-
-int fbd[2];
+#include "global.h"
 
 int distance(int x1, int y1, int x2, int y2) {
     return (x2-x1)+fbd[1]*(y2-y1); // pixel distance for fseeking
@@ -19,29 +16,32 @@ int distance(int x1, int y1, int x2, int y2) {
  * @param y1 The y coordinate (oordinate) of first point.
  * @param x2 The x coordinate (abscissa) of second point.
  * @param y2 The y coordinate (oordinate) of second point.
- * @param flush If true, `fflush`
  */
-void render_line(FILE * restrict fb, int col, int x1, int y1, int x2, int y2) {
-    fseek(fb, 4*(x1+fbd[1]*y1), SEEK_SET); // fseek to first pixel
+
+void render_buf(FILE * restrict fb, uint32_t * restrict buf) {
+    fseek(fb, 0, SEEK_SET);
+    for (int y = 0; y < fbd[0]; ++y) for (int x = 0; x < fbd[1]; ++x) putw(buf[x+fbd[1]*y], fb);
+}
+
+void render_line(uint32_t * restrict buf, int (*col)(int, int), int x1, int y1, int x2, int y2) {
     int py = y1; // previous y value
     int xdir = x1 > x2 ? -1 : x1 == x2 ? 0 : 1; // x direction
-    putw(col, fb);
+    buf[fbd[1]*y1+x1] = col(x1, y1);
     if (xdir == 0) { // draw vertical line
         int ydir = y1 > y2 ? -1 : y1 == y2 ? 0 : 1; // y direction
-        for (int y = y1; y != y2; y += ydir) {
-            putw(col, fb);
-            fseek(fb, 4*ydir*fbd[1]-4, SEEK_CUR); // go 1 line down
+        for (int y = y1+ydir; y != y2+ydir; y += ydir) {
+            buf[fbd[1]*y+x1] = col(x1, y);
         }
     }
     for (int x = x1+xdir; x != x2+xdir; x += xdir) {
         int y = ((y2-y1)*(x-x1))/(x2-x1)+y1; // x -> y function
-        fseek(fb, 4*xdir-4, SEEK_CUR); // move to correct pixel
         int ydir = py > y ? -1 : py == y ? 0 : 1; // y direction 2: electric boogaloo
-        for (int _ = py+ydir; _ != y+ydir; _ += ydir) { putw(col, fb); fseek(fb, 4*ydir*fbd[1]-4, SEEK_CUR); } // vertical line if necessary
-        putw(col, fb); // last pixel
+        for (int _ = py+ydir; _ != y+ydir; _ += ydir) { buf[fbd[1]*_+x] = col(x, _); } // vertical line if necessary
+        buf[fbd[1]*y+x] = col(x, y); // last pixel
         py = y;
     }
 }
+
 
 void render_func(FILE * restrict fb, int (*f)(int, int)) {
     fseek(fb, 0, SEEK_SET);

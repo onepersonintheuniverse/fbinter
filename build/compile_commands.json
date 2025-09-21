@@ -1,8 +1,8 @@
 [
 {
-  "directory": "/mnt/opitu/Gizmos/stuff/projects/fbfun/build",
-  "command": "/home/opitu/.nix-profile/bin/cc  -I/mnt/opitu/Gizmos/stuff/projects/fbfun/include -lm -g -std=gnu99 -o CMakeFiles/fbfun.dir/src/main.c.o -c /mnt/opitu/Gizmos/stuff/projects/fbfun/src/main.c",
-  "file": "/mnt/opitu/Gizmos/stuff/projects/fbfun/src/main.c",
-  "output": "CMakeFiles/fbfun.dir/src/main.c.o"
+  "directory": "/mnt/opitu/Gizmos/stuff/projects/fbinter/build",
+  "command": "/home/opitu/.nix-profile/bin/cc  -I/mnt/opitu/Gizmos/stuff/projects/fbinter/include -lm -g -std=gnu99 -o CMakeFiles/example_cube.dir/src/main.c.o -c /mnt/opitu/Gizmos/stuff/projects/fbinter/src/main.c",
+  "file": "/mnt/opitu/Gizmos/stuff/projects/fbinter/src/main.c",
+  "output": "CMakeFiles/example_cube.dir/src/main.c.o"
 }
 ]

@@ -465,8 +465,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/mnt/opitu/Gizmos/stuff/projects/fbfun/build",
-		"source" : "/mnt/opitu/Gizmos/stuff/projects/fbfun"
+		"build" : "/home/opitu/gizmos/projects/fbinter/build",
+		"source" : "/home/opitu/gizmos/projects/fbinter"
 	},
 	"version" : 
 	{

@@ -1,0 +1,1 @@
+/home/opitu/.nix-profile/bin/cc -lm -rdynamic -Wl,--dependency-file=CMakeFiles/example_cube.dir/link.d CMakeFiles/example_cube.dir/src/main.c.o -o example_cube

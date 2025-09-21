@@ -1,1 +1,0 @@
-/home/opitu/.nix-profile/bin/cc -lm -rdynamic -Wl,--dependency-file=CMakeFiles/fbfun.dir/link.d CMakeFiles/fbfun.dir/src/main.c.o -o fbfun

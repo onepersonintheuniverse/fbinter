@@ -1,5 +1,5 @@
-CMakeFiles/fbfun.dir/src/main.c.o: \
- /mnt/opitu/Gizmos/stuff/projects/fbfun/src/main.c \
+CMakeFiles/example_cube.dir/src/main.c.o: \
+ /home/opitu/gizmos/projects/fbinter/src/main.c \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/stdc-predef.h \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/stdio.h \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/bits/libc-header-start.h \
@@ -68,11 +68,17 @@ CMakeFiles/fbfun.dir/src/main.c.o: \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/bits/wchar.h \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/bits/stdint-uintn.h \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/bits/stdint-least.h \
- /mnt/opitu/Gizmos/stuff/projects/fbfun/include/render.h \
+ /home/opitu/gizmos/projects/fbinter/include/render.h \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/time.h \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/bits/time.h \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/bits/types/struct_tm.h \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/bits/types/struct_itimerspec.h \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/bits/types/locale_t.h \
  /nix/store/41pf3md9zgpda9kwh6rzn5kaddf7i0lp-glibc-2.40-66-dev/include/bits/types/__locale_t.h \
- /mnt/opitu/Gizmos/stuff/projects/fbfun/include/colfun.h
+ /home/opitu/gizmos/projects/fbinter/include/global.h \
+ /home/opitu/gizmos/projects/fbinter/include/colfun.h \
+ /home/opitu/gizmos/projects/fbinter/include/global.h \
+ /home/opitu/gizmos/projects/fbinter/include/points.h \
+ /home/opitu/gizmos/projects/fbinter/include/render.h \
+ /home/opitu/gizmos/projects/fbinter/include/3d.h \
+ /home/opitu/gizmos/projects/fbinter/include/points.h

@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/opitu/Gizmos/stuff/projects/fbfun/src/main.c" "CMakeFiles/fbfun.dir/src/main.c.o" "gcc" "CMakeFiles/fbfun.dir/src/main.c.o.d"
-  "" "fbfun" "gcc" "CMakeFiles/fbfun.dir/link.d"
+  "/home/opitu/gizmos/projects/fbinter/src/main.c" "CMakeFiles/example_cube.dir/src/main.c.o" "gcc" "CMakeFiles/example_cube.dir/src/main.c.o.d"
+  "" "example_cube" "gcc" "CMakeFiles/example_cube.dir/link.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
