@@ -1,3 +1,0 @@
-/home/opitu/gizmos/projects/fbinter/build/CMakeFiles/example_cube.dir
-/home/opitu/gizmos/projects/fbinter/build/CMakeFiles/edit_cache.dir
-/home/opitu/gizmos/projects/fbinter/build/CMakeFiles/rebuild_cache.dir
