@@ -8,6 +8,8 @@ include_directories(include)
 
 add_executable(example_cube src/example_cube.c)
 add_executable(example_param src/example_param.c)
+add_executable(example_3param src/example_3param.c)
 
 target_link_libraries(example_cube PRIVATE m)
 target_link_libraries(example_param PRIVATE m)
+target_link_libraries(example_3param PRIVATE m)

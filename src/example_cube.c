@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <math.h>
+#include <time.h>
 #include <stdint.h>
 #include "render.h"
 #include "colfun.h"

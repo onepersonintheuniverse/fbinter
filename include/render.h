@@ -1,7 +1,15 @@
 #ifndef _KT_FBFUN_RENDER_H
 #define _KT_FBFUN_RENDER_H
-#include <time.h>
+#include <stdio.h>
+#include <stdint.h>
 #include "global.h"
+
+FILE *open_framebuffer(char *fb_dev) {
+    FILE *fb = fopen(fb_dev, "w"), *fbdims = fopen("/sys/class/graphics/fb0/virtual_size", "r");
+    fscanf(fbdims, "%d,%d", fbd+1, fbd);
+    fclose(fbdims);
+    return fb;
+}
 
 int distance(int x1, int y1, int x2, int y2) {
     return (x2-x1)+fbd[1]*(y2-y1); // pixel distance for fseeking
