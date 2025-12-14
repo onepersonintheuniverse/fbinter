@@ -17,9 +17,15 @@ struct point2 project(struct point3 p) {
 
 // i asked "kafan güzel mi?" to this function many times. may god have mercy on it
 struct fbpos ptofbuf(struct point2 p, double xradius) {
-    double center_y = (1+fbd[0])/2.0, center_x = (1+fbd[1])/2.0;
+    double center_y = fbd[0]/2.0, center_x = fbd[1]/2.0;
     struct point2 centered = {p.x*fbd[1]/(2.0*xradius)+center_x, center_y-p.y*fbd[1]/(2.0*xradius)};
     struct fbpos res = {(int)centered.x, (int)centered.y};
+    return res;
+}
+
+struct point2 fbuftop(struct fbpos fp, double xradius) {
+    double center_y = fbd[0]/2.0, center_x = fbd[1]/2.0;
+    struct point2 res = {2.0*xradius*(fp.x-center_x)/fbd[1], 2.0*xradius*(center_y-fp.y)/fbd[1]};
     return res;
 }
 
