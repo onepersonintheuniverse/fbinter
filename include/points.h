@@ -1,6 +1,6 @@
 #ifndef _KT_FBFUN_POINTS_H
 #define _KT_FBFUN_POINTS_H
-#include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <math.h>
 #include "global.h"
@@ -44,7 +44,7 @@ void rotate(struct point3 *p, struct point3 *around, double angle, int ax1, int 
     *getax(p, 6-ax1-ax2) = q3+*getax(around, 6-ax1-ax2);
 }
 
-void render_line_f(uint32_t * restrict buf, int (*col)(int, int), struct fbpos p1, struct fbpos p2) {
+void render_line_f(uint32_t *buf, int (*col)(int, int), struct fbpos p1, struct fbpos p2) {
     render_line(buf, col, p1.x, p1.y, p2.x, p2.y);
 }
 #endif
