@@ -13,6 +13,7 @@
         gcc
         cmake
         libdrm
+        pkg-config
       ];
     };
   };
