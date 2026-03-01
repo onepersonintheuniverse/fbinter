@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include "render.h"
 #include "colfun.h"
-#include "global.h"
 #include "points.h"
 #include "3d.h"
 
@@ -57,6 +56,7 @@ int main(int argc, char **argv) {
     }
     free(buf);
     avg_s /= frames;
+    restore_drm(&s);
     printf("%.3f fps avg [%.3f ms/f]", 1/avg_s, 1000*avg_s);
     return 0;
 }

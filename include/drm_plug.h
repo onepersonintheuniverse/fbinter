@@ -1,5 +1,5 @@
 #ifndef _KT_FBFUN_INTERNAL_DRM_PLUG_H
-#define _KT_FBFUN_INTERNAL_DRM_PLUGl_H
+#define _KT_FBFUN_INTERNAL_DRM_PLUG_H
 #include <drm.h>
 #include <drm_mode.h>
 #include <stdio.h>
@@ -14,6 +14,7 @@
 struct drm_state {
     int fd;
     drmModeModeInfo mode;
+    drmModeCrtc *pv_crtc;
     uint32_t width, height;
     uint32_t pitch;
     uint64_t size;

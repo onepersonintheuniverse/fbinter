@@ -12,6 +12,7 @@ int main(int argc, char **argv) {
     struct drm_state s = *open_drm(cn);
     render_func_drm(s.map, gradient);
     sleep(3);
+    restore_drm(&s);
     return 0;
 }
 
