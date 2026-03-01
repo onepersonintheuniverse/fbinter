@@ -2,6 +2,7 @@
 #define _KT_FBFUN_RENDER_H
 #include <stdio.h>
 #include <stdint.h>
+#include <drm_util.h>
 #include "global.h"
 
 FILE *open_framebuffer(char *fb_dev) {
@@ -9,6 +10,15 @@ FILE *open_framebuffer(char *fb_dev) {
     fscanf(fbdims, "%d,%d", fbd+1, fbd);
     fclose(fbdims);
     return fb;
+}
+
+struct drm_state *open_drm(char *card) {
+    struct drm_state *s = malloc(sizeof(struct drm_state));
+    make_drm(s, card);
+    fbd[0] = s->mode.vdisplay;
+    fbd[1] = s->mode.hdisplay;
+    stride = s->pitch/4;
+    return s;
 }
 
 int distance(int x1, int y1, int x2, int y2) {
@@ -38,20 +48,20 @@ int check_bounds(int x, int y) {
 void render_line(uint32_t *buf, int (*col)(int, int), int x1, int y1, int x2, int y2) {
     int py = y1; // previous y value
     int xdir = x1 > x2 ? -1 : x1 == x2 ? 0 : 1; // x direction
-    if (check_bounds(x1, y1)) buf[fbd[1]*y1+x1] = col(x1, y1);
+    if (check_bounds(x1, y1)) buf[stride*y1+x1] = col(x1, y1);
     if (xdir == 0) { // draw vertical line
         int ydir = y1 > y2 ? -1 : y1 == y2 ? 0 : 1; // y direction
         for (int y = y1+ydir; y != y2+ydir; y += ydir) if (check_bounds(x1, y)) {
-            buf[fbd[1]*y+x1] = col(x1, y);
+            buf[stride*y+x1] = col(x1, y);
         }
     }
     for (int x = x1+xdir; x != x2+xdir; x += xdir) {
         int y = ((y2-y1)*(x-x1))/(x2-x1)+y1; // x -> y function
         int ydir = py > y ? -1 : py == y ? 0 : 1; // y direction 2: electric boogaloo
         for (int _ = py+ydir; _ != y+ydir; _ += ydir) if (check_bounds(x, y)) {
-            buf[fbd[1]*_+x] = col(x, _);
+            buf[stride*_+x] = col(x, _);
         } // vertical line if necessary
-        if (check_bounds(x, y)) buf[fbd[1]*y+x] = col(x, y); // last pixel
+        if (check_bounds(x, y)) buf[stride*y+x] = col(x, y); // last pixel
         py = y;
     }
 }
@@ -64,6 +74,14 @@ void render_func(FILE *fb, int (*f)(int, int)) {
         }
     }
     fflush(fb);
+}
+
+void render_func_drm(uint32_t *buf, int (*f)(int, int)) {
+    for (int i = 0; i < fbd[0]; ++i) {
+        for (int j = 0; j < fbd[1]; ++j) {
+            buf[i*stride+j] = f(i, j);
+        }
+    }
 }
 
 #endif

@@ -21,13 +21,9 @@ uint64_t next() {
 
 int main(int argc, char **argv) {
     x = time(NULL);
-    FILE *fb;
-    if (argc > 1) fb = fopen(argv[1], "w");
-    else fb = fopen("/dev/fb0", "w");
-    FILE *fbdims = fopen("/sys/class/graphics/fb0/virtual_size", "r");
-    fscanf(fbdims, "%d,%d", fbd+1, fbd);
-    fclose(fbdims);
-    render_func(fb, zero);
+    char *cn = "/dev/dri/card1";
+    if (argc > 1) cn = argv[1];
+    struct drm_state s = *open_drm(cn);
     struct point3 v[8], cube_center = {0, 3, 0};
     for (int i = 0; i < 8; ++i) {
         int a = i&1, b = (i>>1)&1, c = i>>2;
@@ -39,25 +35,28 @@ int main(int argc, char **argv) {
     int e2[12] = {1, 3, 5, 7, 2, 3, 6, 7, 4, 5, 6, 7};
     struct wframe wf = {8, 12, v, e1, e2};
     struct timeval t1, t2;
+    uint64_t frames = 0;
     double dt = 0.01, avg_s = 0;
     double spd = 1;
-    uint32_t *buf;
-    for (int _ = 0; _ < 1000; ++_) {
+    uint32_t *buf = malloc(s.size);
+    struct timespec rq = {0, 5000000}, rm;
+    while (avg_s < 5) {
         gettimeofday(&t1, NULL);
-        buf = calloc(fbd[0]*fbd[1], 4);
+        render_func_drm(buf, zero);
         double rx = next()/(double)UINT64_MAX, ry = next()/(double)UINT64_MAX, rz = next()/(double)UINT64_MAX;
         xdir *= rx < thresh ? -1 : 1, ydir *= ry < thresh ? -1 : 1, zdir *= rz < thresh ? -1 : 1;
         render_wframe(buf, white, wf, 2.0);
-        render_buf(fb, buf);
-        fflush(fb);
-        free(buf);
+        memcpy(s.map, buf, s.size);
         rotate_wframe(&wf, &cube_center, xdir*spd*dt, 2, 3);
         rotate_wframe(&wf, &cube_center, ydir*spd*dt, 1, 3);
         rotate_wframe(&wf, &cube_center, zdir*spd*dt, 1, 2);
+        // nanosleep(&rq, &rm);
         gettimeofday(&t2, NULL);
         avg_s += dt = t2.tv_sec-t1.tv_sec+(t2.tv_usec-t1.tv_usec)*1e-6;
+        ++frames;
     }
-    avg_s /= 1000.0;
+    free(buf);
+    avg_s /= frames;
     printf("%.3f fps avg [%.3f ms/f]", 1/avg_s, 1000*avg_s);
     return 0;
 }
