@@ -4,28 +4,24 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 project(fbinter LANGUAGES C)
 
-include_directories(include)
-
-add_executable(example_cube src/example_cube.c)
-add_executable(example_param src/example_param.c)
-add_executable(example_3param src/example_3param.c)
-add_executable(example_discs src/example_discs.c)
-add_executable(example_drm src/example_drm.c)
-add_executable(example_cube_2 src/example_cube_2.c)
-
-target_link_libraries(example_cube PRIVATE m)
-target_link_libraries(example_param PRIVATE m)
-target_link_libraries(example_3param PRIVATE m)
-target_link_libraries(example_discs PRIVATE m)
-target_link_libraries(example_drm PRIVATE m)
-target_link_libraries(example_cube_2 PRIVATE m)
-
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(LIBDRM REQUIRED IMPORTED_TARGET libdrm)
 
-target_link_libraries(example_cube PRIVATE PkgConfig::LIBDRM)
-target_link_libraries(example_discs PRIVATE PkgConfig::LIBDRM)
-target_link_libraries(example_param PRIVATE PkgConfig::LIBDRM)
-target_link_libraries(example_3param PRIVATE PkgConfig::LIBDRM)
-target_link_libraries(example_drm PRIVATE PkgConfig::LIBDRM)
-target_link_libraries(example_cube_2 PRIVATE PkgConfig::LIBDRM)
+add_library(fbinter STATIC src/3d.c src/colfun.c src/curve.c src/drm_plug.c src/drm_util.c src/geom.c src/global.c src/points.c src/render.c)
+target_include_directories(fbinter PUBLIC include)
+target_link_libraries(fbinter PUBLIC m PkgConfig::LIBDRM)
+
+add_executable(example_cube examples/example_cube.c)
+add_executable(example_param examples/example_param.c)
+add_executable(example_3param examples/example_3param.c)
+add_executable(example_discs examples/example_discs.c)
+add_executable(example_drm examples/example_drm.c)
+add_executable(example_cube_2 examples/example_cube_2.c)
+
+target_link_libraries(example_cube PRIVATE fbinter)
+target_link_libraries(example_param PRIVATE fbinter)
+target_link_libraries(example_3param PRIVATE fbinter)
+target_link_libraries(example_discs PRIVATE fbinter)
+target_link_libraries(example_drm PRIVATE fbinter)
+target_link_libraries(example_cube_2 PRIVATE fbinter)
+

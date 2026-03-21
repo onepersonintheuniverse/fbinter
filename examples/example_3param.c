@@ -5,6 +5,7 @@
 #include <points.h>
 #include <global.h>
 #include <colfun.h>
+#include <math.h>
 #include <curve.h>
 
 struct point3 lol(double t) {
