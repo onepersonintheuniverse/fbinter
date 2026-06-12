@@ -1,6 +1,6 @@
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <sys/time.h>
 #include <time.h>
 #include <stdint.h>
@@ -19,11 +19,17 @@ uint64_t next() {
     return z ^ (z >> 31);
 }
 
+int runnow = 1;
+
+void the_damn_thing_is_over() {
+    runnow = 0;
+}
+
 int main(int argc, char **argv) {
     x = time(NULL);
-    char *cn = "/dev/dri/card1";
+    char *cn = "/dev/dri/by-path/pci-0000:00:02.0-card";
     if (argc > 1) cn = argv[1];
-    struct drm_state s = *open_drm(cn);
+    struct drm_state *s = open_drm(cn);
     struct point3 v[8], cube_center = {0, 3, 0};
     for (int i = 0; i < 8; ++i) {
         int a = i&1, b = (i>>1)&1, c = i>>2;
@@ -38,15 +44,16 @@ int main(int argc, char **argv) {
     uint64_t frames = 0;
     double dt = 0.01, avg_s = 0;
     double spd = 1;
-    uint32_t *buf = malloc(s.size);
+    uint32_t *buf = malloc(s->size);
     struct timespec rq = {0, 5000000}, rm;
-    while (avg_s < 5) {
+    signal(SIGINT, the_damn_thing_is_over);
+    while (runnow) {
         gettimeofday(&t1, NULL);
         render_func_drm(buf, zero);
         double rx = next()/(double)UINT64_MAX, ry = next()/(double)UINT64_MAX, rz = next()/(double)UINT64_MAX;
         xdir *= rx < thresh*dt ? -1 : 1, ydir *= ry < thresh*dt ? -1 : 1, zdir *= rz < thresh*dt ? -1 : 1;
         render_wframe(buf, white, wf, 2.0);
-        memcpy(s.map, buf, s.size);
+        render_buf_drm(s, buf);
         rotate_wframe(&wf, &cube_center, xdir*spd*dt, 2, 3);
         rotate_wframe(&wf, &cube_center, ydir*spd*dt, 1, 3);
         rotate_wframe(&wf, &cube_center, zdir*spd*dt, 1, 2);
@@ -57,7 +64,7 @@ int main(int argc, char **argv) {
     }
     free(buf);
     avg_s /= frames;
-    restore_drm(&s);
-    printf("%.3f fps avg [%.3f ms/f]", 1/avg_s, 1000*avg_s);
+    restore_drm(s);
+    printf("-> %.3f fps avg [%.3f ms/f]\n", 1/avg_s, 1000*avg_s);
     return 0;
 }

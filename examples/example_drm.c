@@ -7,12 +7,12 @@ int gradient(int i, int j) {
 }
 
 int main(int argc, char **argv) {
-    char *cn = "/dev/dri/card1";
+    char *cn = "/dev/dri/by-path/pci-0000:00:02.0-card";
     if (argc > 1) cn = argv[1];
-    struct drm_state s = *open_drm(cn);
-    render_func_drm(s.map, gradient);
+    struct drm_state *s = open_drm(cn);
+    render_func_drm(s->map, gradient);
     sleep(3);
-    restore_drm(&s);
+    restore_drm(s);
     return 0;
 }
 

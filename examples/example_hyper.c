@@ -1,6 +1,6 @@
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <sys/time.h>
 #include <time.h>
 #include <stdint.h>
@@ -12,6 +12,12 @@
 
 // splitmix64 algorithm from https://xorshift.di.unimi.it/splitmix64.c
 static uint64_t x;
+
+int runnow = 1;
+
+void sigint_handle(int dummy) {
+    runnow = 0;
+}
 
 uint64_t next() {
     uint64_t z = (x += 0x9e3779b97f4a7c15);
@@ -65,9 +71,9 @@ struct wframe project4_wframe(struct wframe4 *wf, struct point3 *to) {
 
 int main(int argc, char **argv) {
     x = time(NULL);
-    char *cn = "/dev/dri/card1";
+    char *cn = "/dev/dri/by-path/pci-0000:00:02.0-card";
     if (argc > 1) cn = argv[1];
-    struct drm_state s = *open_drm(cn);
+    struct drm_state *s = open_drm(cn);
     struct point4 v[16], hyper_center = {0, 0, 0, 3};
     for (int i = 0; i < 16; ++i) {
         int a = i&1, b = (i>>1)&1, c = (i>>2)&1, d = (i>>3)&1;
@@ -81,19 +87,20 @@ int main(int argc, char **argv) {
     uint64_t frames = 0;
     double dt = 0.01, avg_s = 0;
     double spd = 1;
-    uint32_t *buf = malloc(s.size);
+    uint32_t *buf = malloc(s->size);
     struct timespec rq = {0, 5000000}, rm;
     struct wframe wf3;
     rotate_wframe4(&wf, &hyper_center, next()/(double)UINT64_MAX, 1, 4);
     rotate_wframe4(&wf, &hyper_center, next()/(double)UINT64_MAX, 2, 4);
     rotate_wframe4(&wf, &hyper_center, next()/(double)UINT64_MAX, 3, 4);
-    while (avg_s < 10) {
+    signal(SIGINT, sigint_handle);
+    while (runnow) {
         gettimeofday(&t1, NULL);
         render_func_drm(buf, zero);
         wf3 = project4_wframe(&wf, &(struct point3){0.0, 3.0, 0.0});
         render_wframe(buf, white, wf3, 2.0);
         free(wf3.vertices);
-        memcpy(s.map, buf, s.size);
+        render_buf_drm(s, buf);
         rotate_wframe4(&wf, &hyper_center, spd*dt, 1, 4);
         rotate_wframe4(&wf, &hyper_center, spd*dt, 2, 4);
         rotate_wframe4(&wf, &hyper_center, spd*dt, 3, 4);
@@ -104,7 +111,7 @@ int main(int argc, char **argv) {
     }
     free(buf);
     avg_s /= frames;
-    restore_drm(&s);
-    printf("%.3f fps avg [%.3f ms/f]", 1/avg_s, 1000*avg_s);
+    restore_drm(s);
+    printf("-> %.3f fps avg [%.3f ms/f]\n", 1/avg_s, 1000*avg_s);
     return 0;
 }

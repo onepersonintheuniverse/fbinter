@@ -24,6 +24,10 @@ extern int distance(int x1, int y1, int x2, int y2);
 
 extern void render_buf(FILE *fb, uint32_t *buf);
 
+extern void render_buf_drm(struct drm_state *s, uint32_t *buf);
+
+extern void undirty_drm(struct drm_state *s);
+
 extern int check_bounds(int x, int y);
 
 extern void render_line(uint32_t *buf, int (*col)(int, int), int x1, int y1, int x2, int y2);

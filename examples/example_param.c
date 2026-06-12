@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
@@ -12,16 +11,14 @@ struct point2 lol(double t) {
 }
 
 int main(int argc, char **argv) {
-    FILE *fb;
-    if (argc > 1) fb = fopen(argv[1], "w");
-    else fb = fopen("/dev/fb0", "w");
-    FILE *fbdims = fopen("/sys/class/graphics/fb0/virtual_size", "r");
-    fscanf(fbdims, "%d,%d", fbd+1, fbd);
-    fclose(fbdims);
-    render_func(fb, zero);
-    uint32_t *buf = calloc(fbd[0]*fbd[1], 4);
+    char *cn = "/dev/dri/by-path/pci-0000:00:02.0-card";
+    if (argc > 1) cn = argv[1];
+    struct drm_state *s = open_drm(cn);
+    render_func_drm(s->map, zero);
+    uint32_t *buf = malloc(s->size);
     draw_parametric(buf, lol, white, 0, 0.001*M_PI, 2*M_PI, 4);
-    for (int i = 0; i < 50; ++i) render_buf(fb, buf);
-    fclose(fb);
+    render_buf_drm(s, buf);
+    sleep(3);
+    restore_drm(s);
     return 0;
 }

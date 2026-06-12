@@ -30,7 +30,6 @@ add_executable(example_drm examples/example_drm.c)
 add_executable(example_cube_2 examples/example_cube_2.c)
 add_executable(example_tetra examples/example_tetra.c)
 add_executable(example_hyper examples/example_hyper.c)
-add_executable(example_hyper_inf examples/example_hyper_inf.c)
 
 target_link_libraries(example_cube PRIVATE fbinter_static)
 target_link_libraries(example_param PRIVATE fbinter_static)
@@ -40,5 +39,4 @@ target_link_libraries(example_drm PRIVATE fbinter_static)
 target_link_libraries(example_cube_2 PRIVATE fbinter_static)
 target_link_libraries(example_tetra PRIVATE fbinter_static)
 target_link_libraries(example_hyper PRIVATE fbinter_static)
-target_link_libraries(example_hyper_inf PRIVATE fbinter_static)
 

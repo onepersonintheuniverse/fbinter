@@ -4,6 +4,8 @@
 #include <drm_util.h>
 #include <stdlib.h>
 #include <global.h>
+#include <string.h>
+#include <xf86drmMode.h>
 
 FILE *open_framebuffer(char *fb_dev) {
     FILE *fb = fopen(fb_dev, "w"), *fbdims = fopen("/sys/class/graphics/fb0/virtual_size", "r");
@@ -42,6 +44,15 @@ void render_buf(FILE *fb, uint32_t *buf) {
     for (int y = 0; y < fbd[0]; ++y) for (int x = 0; x < fbd[1]; ++x) putw(buf[x+fbd[1]*y], fb);
 }
 
+void render_buf_drm(struct drm_state *s, uint32_t *buf) {
+    memcpy(s->map, buf, s->size);
+    drmModeDirtyFB(s->fd, s->fb_id, NULL, 0);
+}
+
+void undirty_drm(struct drm_state *s) {
+    drmModeDirtyFB(s->fd, s->fb_id, NULL, 0);
+}
+
 int check_bounds(int x, int y) {
     return 0 <= y && y < fbd[0] && 0 <= x && x < fbd[1];
 }
@@ -59,8 +70,8 @@ void render_line(uint32_t *buf, int (*col)(int, int), int x1, int y1, int x2, in
     for (int x = x1+xdir; x != x2+xdir; x += xdir) {
         int y = ((y2-y1)*(x-x1))/(x2-x1)+y1; // x -> y function
         int ydir = py > y ? -1 : py == y ? 0 : 1; // y direction 2: electric boogaloo
-        for (int _ = py+ydir; _ != y+ydir; _ += ydir) if (check_bounds(x, y)) {
-            buf[stride*_+x] = col(x, _);
+        for (int y2 = py+ydir; y2 != y+ydir; y2 += ydir) if (check_bounds(x, y2)) {
+            buf[stride*y2+x] = col(x, y2);
         } // vertical line if necessary
         if (check_bounds(x, y)) buf[stride*y+x] = col(x, y); // last pixel
         py = y;
