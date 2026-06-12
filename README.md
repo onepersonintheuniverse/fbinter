@@ -1,3 +1,5 @@
+<img width="640" height="480" alt="demo-640x480" src="https://github.com/user-attachments/assets/31538af1-c719-4cc2-b7ee-fe25c9ac0a9b" />
+
 fbinter, short for framebuffer interactor, is a project started from boredom.
 Its original name is fbfun, which stands for framebuffer fun. References to this
 name can still be found in the source code, where every header guard is prefixed
